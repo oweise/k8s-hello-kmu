@@ -1,9 +1,35 @@
 ---
-- rds:
-    command: delete
-    region: eu-west-1
-    instance_name: k8s-hello-kmu-db-replica-1
-- rds:
-    command: delete
-    region: eu-west-1
-    instance_name: k8s-hello-kmu-db
+- name: Delete replica RDS instance
+  rds_instance:
+      state: absent
+      db_instance_identifier: k8s-hello-kmu-psql-replica-1
+      read_replica: true
+      source_db_instance_identifier: 'k8s-hello-kmu-psql'
+      engine: postgres
+      engine_version: '10.7'
+      allocated_storage: 10
+      db_instance_class: db.m5.large
+      master_username: '{{ db_root_user }}'
+      master_user_password: '{{ db_root_password }}'
+      multi_az: false
+      publicly_accessible: true
+      wait: yes
+      region: eu-west-1
+      skip_final_snapshot: true
+
+- name: Delete master RDS instance
+  rds_instance:
+      state: absent
+      db_instance_identifier: k8s-hello-kmu-psql
+      db_name: 'k8s_hello_kmu'
+      engine: postgres
+      engine_version: '10.7'
+      allocated_storage: 10
+      db_instance_class: db.m5.large
+      master_username: '{{ db_root_user }}'
+      master_user_password: '{{ db_root_password }}'
+      multi_az: false
+      publicly_accessible: true
+      wait: yes
+      region: eu-west-1
+      skip_final_snapshot: true

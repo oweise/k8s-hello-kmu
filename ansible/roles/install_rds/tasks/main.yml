@@ -11,7 +11,7 @@
     master_username: '{{ db_root_user }}'
     master_user_password: '{{ db_root_password }}'
     multi_az: false
-    publicly_accessible: false
+    publicly_accessible: true
     wait: yes
     region: eu-west-1
 
@@ -28,6 +28,6 @@
     master_username: '{{ db_root_user }}'
     master_user_password: '{{ db_root_password }}'
     multi_az: false
-    publicly_accessible: false
+    publicly_accessible: true
     wait: yes
     region: eu-west-1
