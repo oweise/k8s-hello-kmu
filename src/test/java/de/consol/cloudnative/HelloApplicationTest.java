@@ -29,7 +29,7 @@ public class HelloApplicationTest {
         final String appliationUrl = "http://localhost:" + port;
         final ResponseEntity<String> response = restTemplate.getForEntity(appliationUrl + "/", String.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), containsString("The index page!"));
+        assertThat(response.getBody(), containsString("Tweets"));
     }
 
 }
