@@ -45,9 +45,11 @@ spec:
           value: k8s_hello_kmu
         - name: DB_USER
           valueFrom:
-            secret: db-credentials
-            key: username
+            secretKeyRef:
+              name: db-credentials
+              key: username
         - name: DB_PWD
           valueFrom:
-            secret: db-credentials
-            key: password
+            secretKeyRef:
+              name: db-credentials
+              key: password
