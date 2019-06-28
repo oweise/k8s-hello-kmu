@@ -1,0 +1,7 @@
+---
+- name: Install Postgres RDS
+  hosts: local
+  tasks:
+    - name: Install RDS
+      import_role:
+        name: install_rds

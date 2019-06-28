@@ -1,0 +1,26 @@
+---
+- name: Create master RDS instance
+  rds:
+    command: create
+    instance_name: k8s-hello-kmu-db
+    db_engine: postgres
+    size: 10
+    instance_type: db.m5.large
+    username: root
+    password: '{{ db_root_password }}'
+    wait: yes
+    wait_timeout: 600
+    region: eu-west-1
+    tags:
+      owner: '{{ owner }}'
+
+- name: Create replica RDS instance
+  rds:
+    command: replicate
+    instance_name: k8s-hello-kmu-db-replica-1
+    source_instance: k8s-hello-kmu-db
+    region: eu-west-1
+    wait: yes
+    wait_timeout: 600
+    tags:
+        owner: '{{ owner }}'

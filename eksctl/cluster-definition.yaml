@@ -11,6 +11,6 @@ nodeGroups:
 - name: ng-1
   ami: ami-0a9006fb385703b54
   instanceType: m5.large
-  desiredCapacity: 3
+  desiredCapacity: 5
   ssh:
     allow: true

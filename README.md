@@ -17,7 +17,7 @@ in any case when using these technologies.
 
 These tools are:
 
-- A bash-like shell. If you are a Windows user we recommend you install the 
+- A bash-like shell. If you are a Windows author we recommend you install the 
   [Linux Subsystem for Windows][bashOnWindows]. Might seem overkill right now,
   but working with Kubernetes is often tightly coupled to working with Linux, so 
   we think going this way now might quite save you some nerves further down the line. 
@@ -93,7 +93,7 @@ Within the root directory of the project, you will find a file
 #!/usr/bin/env bash
 export CLUSTER_NAME=k8s-hello
 export GITHUB_TOKEN="<enter token here>"
-export GITHUB_USER="<enter user here>"
+export GITHUB_USER="<enter author here>"
 export CODEBUILD_DOCKERIMAGE="aws/codebuild/java:openjdk-8"
 export OWNER="<your name here>"
 
@@ -249,3 +249,10 @@ potentially undeleted resources.
 [kubectlCLI]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [awsIAMAuthenticator]: https://github.com/kubernetes-sigs/aws-iam-authenticator/releases
 [bashOnWindows]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+
+# K8S-HELLO-KMU additional notes
+
+- Needs now Ansible
+- Needs Boto
+- Needs DB_ROOT_PASSWORD

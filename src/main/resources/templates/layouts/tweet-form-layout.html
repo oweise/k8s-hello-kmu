@@ -1,0 +1,18 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<div data-th-fragment="layout">
+    <form method="POST" action="#" data-th-action="@{/tweet-form/addTweet}" modelAttribute="tweet">
+        <table>
+            <tr>
+                <td><label path="author">Author</label></td>
+                <td><input data-th-field="*{tweet.author}" path="author"/></td>
+            </tr>
+            <tr>
+                <td><label path="body">Body</label></td>
+                <td><input data-th-field="*{tweet.body}" path="body"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+    </form>
+</div>

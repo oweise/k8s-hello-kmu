@@ -1,0 +1,7 @@
+---
+- name: Destroy Postgres RDS
+  hosts: local
+  tasks:
+    - name: Install RDS
+      import_role:
+        name: destroy_rds

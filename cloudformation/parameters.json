@@ -18,5 +18,9 @@
   {
     "ParameterKey": "GitBranch",
     "ParameterValue": "${GIT_BRANCH}"
+  },
+  {
+    "ParameterKey": "GitSourceRepo",
+    "ParameterValue": "k8s-hello-kmu"
   }
 ]

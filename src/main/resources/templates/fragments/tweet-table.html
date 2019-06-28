@@ -1,0 +1,24 @@
+<table data-th-fragment="tweet-table" class="table table-striped">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Body</th>
+        <th scope="col">Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="tweet: ${tweets}">
+        <td data-th-text="${tweet.author}"></td>
+        <td data-th-text="${tweet.body}"></td>
+        <td data-th-text="${tweet.time}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div data-th-if="${tweets.totalPages > 0}" class="pagination"
+     data-th-each="pageNumber : ${pageNumbers}">
+    <a data-th-href="@{/(size=${bookPage.size}, page=${pageNumber})}"
+       data-th-text=${pageNumber}
+       data-th-class="${pageNumber==tweets.number + 1} ? active"></a>
+</div>

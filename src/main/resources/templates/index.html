@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head data-th-replace="~{fragments/head}"></head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" aria-label="breadcrumb">
+    <ol class="breadcrumb bg-dark">
+        <li class="breadcrumb-item active text-light" aria-current="page">Tweets</li>
+    </ol>
+</nav>
+
+<main role="main" class="container">
+    <table data-th-replace="${detailView} :: ${detailSelector}"></table>
+</main>
+
+<div data-th-include="~{fragments/scripts}"></div>
+</body>
+</html>

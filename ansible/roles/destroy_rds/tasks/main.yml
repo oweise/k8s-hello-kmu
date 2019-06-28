@@ -1,0 +1,9 @@
+---
+- rds:
+    command: delete
+    region: eu-west-1
+    instance_name: k8s-hello-kmu-db-replica-1
+- rds:
+    command: delete
+    region: eu-west-1
+    instance_name: k8s-hello-kmu-db

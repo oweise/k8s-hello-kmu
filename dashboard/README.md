@@ -35,7 +35,7 @@ kubectl apply -f eks-admin-service-account.yaml
 kubectl apply -f eks-admin-cluster-role-binding.yaml
 ```
 
-* Ouput token for the eks-admin user, copying the token for the next step
+* Ouput token for the eks-admin author, copying the token for the next step
 ```
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
 ```

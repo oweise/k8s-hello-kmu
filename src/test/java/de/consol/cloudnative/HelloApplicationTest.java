@@ -7,9 +7,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,7 +29,7 @@ public class HelloApplicationTest {
         final String appliationUrl = "http://localhost:" + port;
         final ResponseEntity<String> response = restTemplate.getForEntity(appliationUrl + "/", String.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), containsString("Hi"));
+        assertThat(response.getBody(), containsString("The index page!"));
     }
 
 }
