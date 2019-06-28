@@ -9,3 +9,4 @@ terraform.tfstate*
 .terraform.tfstate.lock.info
 config_map_aws_auth.yaml
 config.sh
+*.retry

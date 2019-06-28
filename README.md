@@ -253,6 +253,13 @@ potentially undeleted resources.
 
 # K8S-HELLO-KMU additional notes
 
+## Additional requirements
+
 - Needs now Ansible
 - Needs Boto
 - Needs DB_ROOT_PASSWORD
+
+## Todo
+
+- Add Tags to RDS instances
+- Do not use master user on RDS

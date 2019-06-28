@@ -38,3 +38,16 @@ spec:
           allowPrivilegeEscalation: false
         ports:
         - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: k8s-hello-kmu-psql.clprbf7eazbu.eu-west-1.rds.amazonaws.com
+        - name: DB_NAME
+          value: k8s_hello_kmu
+        - name: DB_USER
+          valueFrom:
+            secret: db-credentials
+            key: username
+        - name: DB_PWD
+          valueFrom:
+            secret: db-credentials
+            key: password

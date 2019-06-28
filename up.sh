@@ -52,6 +52,14 @@ kubectl patch configmap/aws-auth -n kube-system --patch "$(cat tmp/aws-auth-patc
 rm tmp/aws-auth-patch.yml
 
 echo "========================================================================="
+echo "k8s-hello: Apply basic Kubernetes resources"
+echo "========================================================================="
+
+cat secret-db-credentials.yml | envsubst > tmp/secret-db-credentials.yml
+kubectl apply -f tmp/secret-db-credentials.yml
+rm tmp/secret-db-credentials.yml
+
+echo "========================================================================="
 echo "k8s-hello: Creating Project Pipeline"
 echo "========================================================================="
 
