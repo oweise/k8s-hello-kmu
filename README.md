@@ -263,3 +263,4 @@ potentially undeleted resources.
 
 - Add Tags to RDS instances
 - Do not use master user on RDS
+- Add Peer, Route between VPCs automatically

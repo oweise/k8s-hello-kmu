@@ -54,9 +54,8 @@ spec:
               name: db-credentials
               key: password
         livenessProbe:
-          exec:
-            httpGet:
-              path: /
-              port: 8080
+          httpGet:
+            path: /
+            port: 8080
           initialDelaySeconds: 5
           periodSeconds: 5
