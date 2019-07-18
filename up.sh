@@ -99,9 +99,9 @@ else
 fi
 
 echo "========================================================================="
-echo "k8s-hello: Create more resources via Ansible"
+echo "k8s-hello: Create more resources via Terraform"
 echo "========================================================================="
-ansible/up.sh
+terraform/up.sh
 
 echo "========================================================================="
 echo "k8s-hello: FINISHED"
