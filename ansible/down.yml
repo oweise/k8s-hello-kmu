@@ -2,6 +2,12 @@
 - name: Destroy Postgres RDS
   hosts: local
   tasks:
-    - name: Install RDS
-      import_role:
-        name: destroy_rds
+  - name: Read data
+    import_role:
+      name: read_data
+  - name: Destroy Networking
+    import_role:
+      name: destroy_nw
+  - name: Destroy RDS
+    import_role:
+      name: destroy_rds

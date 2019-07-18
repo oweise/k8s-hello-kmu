@@ -1,0 +1,13 @@
+---
+- name: Create VPC Peer
+  ec2_vpc_peer:
+    region: eu-west-1
+    vpc_id: '{{ eks_cluster[0].ResourcesVpcConfig.VpcId }}'
+    peer_vpc_id: '{{ rds_master.db_subnet_group.vpc_id }}'
+    state: present
+  register: vpc_peer
+
+- name: Accept VPC Peer
+  ec2_vpc_peer:
+    peering_id: '{{ vpc_peer.peering_id }}'
+    state: accept

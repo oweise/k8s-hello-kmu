@@ -8,4 +8,5 @@ cd "$(dirname "$0")"
 ansible-playbook -i aws.inventory down.yml \
     -e db_root_user="${DB_ROOT_USER}" \
     -e db_root_password="${DB_ROOT_PASSWORD}" \
-    -e owner="${OWNER}"
+    -e owner="${OWNER}" \
+    -e cluster_name="${CLUSTER_NAME}"

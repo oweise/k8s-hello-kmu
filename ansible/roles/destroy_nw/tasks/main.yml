@@ -1,0 +1,7 @@
+---
+- name: Delete VPC Peer
+  ec2_vpc_peer:
+    region: eu-west-1
+    vpc_id: '{{ eks_cluster[0].ResourcesVpcConfig.VpcId }}'
+    peer_vpc_id: '{{ rds_master.db_subnet_group.vpc_id }}'
+    state: absent

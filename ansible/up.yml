@@ -2,6 +2,12 @@
 - name: Install Postgres RDS
   hosts: local
   tasks:
+    - name: Read data
+      import_role:
+        name: read_data
     - name: Install RDS
       import_role:
         name: install_rds
+    - name: Install Networking
+      import_role:
+        name: install_nw

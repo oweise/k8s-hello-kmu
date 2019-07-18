@@ -17,6 +17,10 @@ else
   rm tmp/cluster-definition.yaml
 fi
 
+echo "Writing EKS cluster metadata"
+mkdir -p work
+eksctl get cluster ${CLUSTER_NAME} -o yaml > work/cluster.yml
+
 echo "========================================================================="
 echo "k8s-hello: Create Deploy Role and grant Kubernetes Access"
 echo "========================================================================="

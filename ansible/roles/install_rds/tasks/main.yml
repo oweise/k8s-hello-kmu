@@ -14,6 +14,7 @@
     publicly_accessible: true
     wait: yes
     region: eu-west-1
+  register: rds_master
 
 - name: Create replica RDS instance
   rds_instance:

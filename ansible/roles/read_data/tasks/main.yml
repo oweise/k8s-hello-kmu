@@ -1,0 +1,6 @@
+---
+- name: Read cluster information
+  set_fact:
+    eks_cluster: "{{ lookup('file', '../work/cluster.yml') | from_yaml }}"
+- debug:
+    msg: "{{ eks_cluster }}"
