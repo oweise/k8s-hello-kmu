@@ -8,4 +8,8 @@ cd "$(dirname "$0")"
 
 cat input.template.tfvars | envsubst > ../tmp/input.tfvars
 terraform init
-terraform apply -auto-approve -var-file=../tmp/input.tfvars
+terraform apply -auto-approve \
+    -var-file=../tmp/input.tfvars \
+    -var database_password="${DB_ROOT_PASSWORD}" \
+    -var access_key="${AWS_ACCESS_KEY}" \
+    -var secret_key="${AWS_SECRET_KEY}"

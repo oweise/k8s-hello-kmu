@@ -1,5 +1,2 @@
-database_user = "${DATABASE_USER}"
-database_password = "${DATABASE_PASSWORD}"
-access_key = "${AWS_ACCESS_KEY}"
-secret_key = "${AWS_SECRET_KEY}"
+database_user = "${DB_ROOT_USER}"
 region = "${AWS_REGION}"

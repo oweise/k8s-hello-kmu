@@ -7,10 +7,9 @@ trap "exit" INT
 mkdir -p tmp
 
 echo "========================================================================="
-echo "k8s-hello: Deleting resources created by Ansible"
+echo "k8s-hello: Deleting resources created by Terraform"
 echo "========================================================================="
-# ansible/down.sh
-
+terraform/down.sh
 
 echo "========================================================================="
 echo "k8s-hello: Delete Kubernetes entities"

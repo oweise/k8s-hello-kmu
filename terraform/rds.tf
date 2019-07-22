@@ -1,16 +1,17 @@
-data "local_file" "eks_cluster" {
-  filename = "../work/cluster.yml"
-}
-
-locals {
-  eks_vpc_id = "${yamldecode(data.local_file.eks_cluster.content)[0].ResourcesVpcConfig.VpcId}"
-}
-
 resource "aws_subnet" "k8s_hello_kmu_rds_subnet" {
-  vpc_id     = "${local.eks_vpc_id}"
-  cidr_block = "172.31.0.0/16"
+  vpc_id     = "${data.aws_vpc.eks_vpc.id}"
+  cidr_block = "192.168.192.0/19"
   tags = {
     Name = "Main"
+  }
+}
+
+resource "aws_db_subnet_group" "default" {
+  name       = "main"
+  subnet_ids = ["${aws_subnet.frontend.id}", "${aws_subnet.backend.id}"]
+
+  tags = {
+    Name = "My DB subnet group"
   }
 }
 
