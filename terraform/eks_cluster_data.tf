@@ -9,3 +9,7 @@ locals {
 data "aws_vpc" "eks_vpc" {
   id = "${local.eks_vpc_id}"
 }
+
+data "aws_eks_cluster" "eks" {
+  name = "${var.eks_cluster_name}"
+}

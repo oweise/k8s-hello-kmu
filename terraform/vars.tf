@@ -7,3 +7,4 @@ variable "rds_vpc_cidr" {}
 variable "rds_subnet1_az" {}
 variable "rds_subnet2_az" {}
 variable "rds_subnet3_az" {}
+variable "eks_cluster_name" {}
