@@ -49,17 +49,3 @@ resource "aws_db_instance" "k8s_hello_kmu_rds_replica1" {
   skip_final_snapshot  = true
 //  security_group_names = ["rds"]
 }
-
-resource "aws_route53_record" "www-dev" {
-  zone_id = "${aws_route53_zone.primary.zone_id}"
-  name    = "www"
-  type    = "CNAME"
-  ttl     = "5"
-
-  weighted_routing_policy {
-    weight = 10
-  }
-
-  set_identifier = "dev"
-  records        = ["${aws_db_instance.k8s_hello_kmu_rds.address}"]
-}
