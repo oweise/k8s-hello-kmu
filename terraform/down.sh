@@ -12,3 +12,5 @@ terraform destroy -auto-approve \
     -var database_password="${DATABASE_PASSWORD}" \
     -var access_key="${AWS_ACCESS_KEY}" \
     -var secret_key="${AWS_SECRET_KEY}"
+
+rm ../tmp/input.tfvars

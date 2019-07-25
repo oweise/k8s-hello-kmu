@@ -1,43 +1,65 @@
-resource "aws_subnet" "k8s_hello_kmu_rds_subnet" {
-  vpc_id     = "${data.aws_vpc.eks_vpc.id}"
-  cidr_block = "192.168.192.0/19"
-  tags = {
-    Name = "Main"
-  }
-}
+//resource "aws_security_group" "rds" {
+//  name        = "rds"
+//  vpc_id      = "${aws_vpc.rds.id}"
+//  ingress {
+//    from_port       = 5432
+//    to_port         = 5432
+//    protocol        = "tcp"
+//  }
+//  # Allow all outbound traffic.
+//  egress {
+//    from_port   = 0
+//    to_port     = 0
+//    protocol    = "-1"
+//    cidr_blocks = ["0.0.0.0/0"]
+//  }
+//  tags = {
+//    Name = "rds"
+//  }
+//}
 
-resource "aws_db_subnet_group" "default" {
-  name       = "main"
-  subnet_ids = ["${aws_subnet.frontend.id}", "${aws_subnet.backend.id}"]
-
-  tags = {
-    Name = "My DB subnet group"
-  }
-}
 
 resource "aws_db_instance" "k8s_hello_kmu_rds" {
-  allocated_storage    = 10
-  storage_type         = "gp2"
-  engine               = "postgres"
-  engine_version       = "10.7"
-  instance_class       = "db.m5.large"
-  name                 = "k8s_hello_kmu"
-  username             = "${var.database_user}"
-  password             = "${var.database_password}"
-  multi_az             = false
-  db_subnet_group_name = "${aws_subnet.k8s_hello_kmu_rds_subnet.id}"
+  identifier              = "k8s-hello-kmu"
+  allocated_storage       = 10
+  storage_type            = "gp2"
+  engine                  = "postgres"
+  engine_version          = "10.7"
+  instance_class          = "db.m5.large"
+  name                    = "k8s_hello_kmu"
+  username                = "${var.database_user}"
+  password                = "${var.database_password}"
+  multi_az                = false
+  backup_retention_period = 7
+  skip_final_snapshot     = true
+  db_subnet_group_name    = "${aws_db_subnet_group.rds.name}"
+//  security_group_names = ["rds"]
 }
 
 resource "aws_db_instance" "k8s_hello_kmu_rds_replica1" {
+  identifier           = "k8s-hello-kmu-replica1"
   allocated_storage    = 10
   storage_type         = "gp2"
   engine               = "postgres"
   engine_version       = "10.7"
   instance_class       = "db.m5.large"
   name                 = "k8s_hello_kmu"
-  username             = "${var.database_user}"
-  password             = "${var.database_password}"
   multi_az             = false
-  db_subnet_group_name = "${aws_subnet.k8s_hello_kmu_rds_subnet.id}"
   replicate_source_db  = "${aws_db_instance.k8s_hello_kmu_rds.id}"
+  skip_final_snapshot  = true
+//  security_group_names = ["rds"]
+}
+
+resource "aws_route53_record" "www-dev" {
+  zone_id = "${aws_route53_zone.primary.zone_id}"
+  name    = "www"
+  type    = "CNAME"
+  ttl     = "5"
+
+  weighted_routing_policy {
+    weight = 10
+  }
+
+  set_identifier = "dev"
+  records        = ["${aws_db_instance.k8s_hello_kmu_rds.address}"]
 }
