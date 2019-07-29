@@ -36,4 +36,6 @@ phases:
     - kubectl apply -f k8s-final.yml
     - printf '[{"name":"k8s-hello","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
 artifacts:
-  files: build.json
+  files:
+  - k8s-final.yml
+  - build.json
