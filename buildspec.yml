@@ -25,12 +25,12 @@ phases:
     commands:
     - docker push $REPOSITORY_URI:$TAG
     - aws sts get-caller-identity
-    - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild --duration-seconds 900)
+    - export CREDENTIALS="$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild --duration-seconds 900)"
     - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
     - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
     - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
-    - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
-    - RDS_HOSTNAME=$(aws rds describe-db-instances --db-instance-identifier k8s-hello-kmu --query DBInstances[0].Endpoint.Address)
+    - export AWS_EXPIRATION="$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')"
+    - export RDS_HOSTNAME="$(aws rds describe-db-instances --db-instance-identifier k8s-hello-kmu --query DBInstances[0].Endpoint.Address)"
     - cat k8s.yml | envsubst > k8s-final.yml
     - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
     - kubectl apply -f k8s-final.yml
