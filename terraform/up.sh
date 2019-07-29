@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 . ../config.sh
 
 cat input.template.tfvars | envsubst > ../tmp/input.tfvars
-terraform init
+terraform init -input=false
 terraform apply -auto-approve \
     -var-file=../tmp/input.tfvars \
     -var database_password="${DB_ROOT_PASSWORD}" \

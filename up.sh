@@ -64,6 +64,11 @@ kubectl apply -f tmp/secret-db-credentials.yml
 rm tmp/secret-db-credentials.yml
 
 echo "========================================================================="
+echo "k8s-hello: Create network and DB resources via Terraform"
+echo "========================================================================="
+terraform/up.sh
+
+echo "========================================================================="
 echo "k8s-hello: Creating Project Pipeline"
 echo "========================================================================="
 
@@ -97,11 +102,6 @@ else
     aws cloudformation wait stack-create-complete \
         --stack-name=${PIPELINE_STACK_NAME}
 fi
-
-echo "========================================================================="
-echo "k8s-hello: Create more resources via Terraform"
-echo "========================================================================="
-terraform/up.sh
 
 echo "========================================================================="
 echo "k8s-hello: FINISHED"

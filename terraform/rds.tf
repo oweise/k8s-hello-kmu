@@ -1,23 +1,23 @@
-//resource "aws_security_group" "rds" {
-//  name        = "rds"
-//  vpc_id      = "${aws_vpc.rds.id}"
-//  ingress {
-//    from_port       = 5432
-//    to_port         = 5432
-//    protocol        = "tcp"
-//  }
-//  # Allow all outbound traffic.
-//  egress {
-//    from_port   = 0
-//    to_port     = 0
-//    protocol    = "-1"
-//    cidr_blocks = ["0.0.0.0/0"]
-//  }
-//  tags = {
-//    Name = "rds"
-//  }
-//}
-
+resource "aws_security_group" "rds" {
+  name        = "rds"
+  vpc_id      = "${aws_vpc.rds.id}"
+  ingress {
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    cidr_blocks = ["${data.aws_vpc.eks_vpc.cidr_block}"]
+  }
+  # Allow all outbound traffic.
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "rds"
+  }
+}
 
 resource "aws_db_instance" "k8s_hello_kmu_rds" {
   identifier              = "k8s-hello-kmu"
@@ -33,7 +33,7 @@ resource "aws_db_instance" "k8s_hello_kmu_rds" {
   backup_retention_period = 7
   skip_final_snapshot     = true
   db_subnet_group_name    = "${aws_db_subnet_group.rds.name}"
-//  security_group_names = ["rds"]
+  vpc_security_group_ids = ["${aws_security_group.rds.id}"]
 }
 
 resource "aws_db_instance" "k8s_hello_kmu_rds_replica1" {
@@ -47,5 +47,5 @@ resource "aws_db_instance" "k8s_hello_kmu_rds_replica1" {
   multi_az             = false
   replicate_source_db  = "${aws_db_instance.k8s_hello_kmu_rds.id}"
   skip_final_snapshot  = true
-//  security_group_names = ["rds"]
+  vpc_security_group_ids = ["${aws_security_group.rds.id}"]
 }

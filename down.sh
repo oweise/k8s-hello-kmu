@@ -7,17 +7,6 @@ trap "exit" INT
 mkdir -p tmp
 
 echo "========================================================================="
-echo "k8s-hello: Deleting resources created by Terraform"
-echo "========================================================================="
-terraform/down.sh
-
-echo "========================================================================="
-echo "k8s-hello: Delete Kubernetes entities"
-echo "========================================================================="
-
-kubectl delete -f k8s.yml
-
-echo "========================================================================="
 echo "k8s-hello: Deleting Project Pipeline"
 echo "========================================================================="
 
@@ -29,6 +18,18 @@ if aws cloudformation describe-stack-resources --stack-name=${PIPELINE_STACK_NAM
 else
     echo "Pipeline stack does not exist. Skipping ..."
 fi
+
+echo "========================================================================="
+echo "k8s-hello: Deleting network and DB resources created by Terraform"
+echo "========================================================================="
+terraform/down.sh
+
+echo "========================================================================="
+echo "k8s-hello: Delete Kubernetes entities"
+echo "========================================================================="
+
+kubectl delete -f k8s.yml
+
 
 echo "========================================================================="
 echo "k8s-hello: Deleting Deploy role"

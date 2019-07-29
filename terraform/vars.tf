@@ -4,7 +4,5 @@ variable "access_key" {}
 variable "secret_key" {}
 variable "region" {}
 variable "rds_vpc_cidr" {}
-variable "rds_subnet1_az" {}
-variable "rds_subnet2_az" {}
-variable "rds_subnet3_az" {}
+variable "rds_subnet_azs" {}
 variable "eks_cluster_name" {}

@@ -40,7 +40,7 @@ spec:
         - containerPort: 8080
         env:
         - name: DB_HOST
-          value: '${RDS_HOSTNAME}'
+          value: "${RDS_HOSTNAME}"
         - name: DB_NAME
           value: k8s_hello_kmu
         - name: DB_USER
