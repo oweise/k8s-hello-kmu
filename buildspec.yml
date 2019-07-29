@@ -30,7 +30,7 @@ phases:
     - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
     - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
     - export AWS_EXPIRATION="$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')"
-    - export RDS_HOSTNAME="$(aws rds describe-db-instances --db-instance-identifier k8s-hello-kmu --query DBInstances[0].Endpoint.Address)"
+    - export RDS_HOSTNAME="$(aws rds describe-db-instances --db-instance-identifier k8s-hello-kmu --query DBInstances[0].Endpoint.Address --output text)"
     - cat k8s.yml | envsubst > k8s-final.yml
     - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
     - kubectl apply -f k8s-final.yml
